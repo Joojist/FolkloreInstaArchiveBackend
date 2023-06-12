@@ -1,31 +1,31 @@
 <?php
-// bootstrap.php
-use Doctrine\DBAL\DriverManager;
+
+use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\SchemaTool;
+use Doctrine\Common\Annotations\AnnotationReader;
+use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 use App\Entity\Post;
 
 require_once "vendor/autoload.php";
 
-// Create a simple "default" Doctrine ORM configuration for Attributes
-$config = ORMSetup::createAttributeMetadataConfiguration(
-    paths: array(__DIR__."/src"),
-    isDevMode: true,
-);
+// Create a simple "default" Doctrine ORM configuration
+$isDevMode = true;
+$entitiesPath = [__DIR__."/src"];
+$dbParams = include 'config/database.php';
+
+// Doctrine configuration
+$config = Setup::createAnnotationMetadataConfiguration($entitiesPath, $isDevMode);
+$driver = new AnnotationDriver(new AnnotationReader(), $entitiesPath);
+$config->setMetadataDriverImpl($driver);
+
+$entityManager = EntityManager::create($dbParams, $config);
 
 try {
-    // configuring the database connection
-    $connection = DriverManager::getConnection([
-        'url' => 'pgsql://postgres:postgres@localhost:5432/Folklore',
-    ], $config);
-
-        // obtaining the entity manager
-    $entityManager = new EntityManager($connection, $config);
-
     // Check if the connection is successful
-    if ($connection->connect()) {
-        echo "Connected to the database!" . PHP_EOL;
-    }
+    $connection = $entityManager->getConnection();
+    $connection->connect();
+    echo "Connected to the database!" . PHP_EOL;
 
     // Create an instance of SchemaTool
     $schemaTool = new SchemaTool($entityManager);
@@ -45,12 +45,31 @@ try {
 }
 
 $post = new Post();
-$post->setIgUrl(123456);
-$post->setIgUserId(789);
-$post->setLikes(10);
+
+// Set values for the properties
+$post->setIgUrl('https://www.example.com');
+$post->setIgUserId(123);
+$post->setLikes(50);
+$post->setCreatorId(456);
+$post->setUpdaterId(789);
+
+// Create DateTime objects for date properties
+$igCreatedAt = new \DateTime('2023-06-12 10:00:00');
+$createdAt = new \DateTime('2023-06-12 10:00:00');
+$updatedAt = new \DateTime('2023-06-12 10:00:00');
+$deletedAt = new \DateTime('2023-06-12 10:00:00');
+
+// Set date values for date properties
+$post->setIgCreatedAt($igCreatedAt);
+$post->setCreatedAt($createdAt);
+$post->setUpdatedAt($updatedAt);
+$post->setDeletedAt($deletedAt);
 
 // ... Perform additional operations with the entity ...
 
-// Flush the changes to the database
+// Persist the entity
 $entityManager->persist($post);
+
+// Flush the changes to the database
 $entityManager->flush();
+
