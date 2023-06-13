@@ -1,5 +1,4 @@
 <?php
-// src/Controller/PostController.php
 
 namespace App\Controller;
 
@@ -30,7 +29,7 @@ class PostController extends AbstractController
         $post->setIgCreatedAt(new \DateTime($postData['igCreatedAt']));
         $post->setCreatedAt(new \DateTime());
         $post->setUpdatedAt(new \DateTime());
-        $post->setDeletedAt(null);
+        $post->setDeletedAt(new \DateTime($postData['deletedAt']));
 
         // Save the post to the database
         $entityManager->persist($post);
