@@ -9,7 +9,7 @@ use App\Entity\Post;
 
 require_once "vendor/autoload.php";
 
-// Create a simple "default" Doctrine ORM configuration test
+// Create a simple "default" Doctrine ORM configuration
 $isDevMode = true;
 $entitiesPath = [__DIR__."/src"];
 $dbParams = include 'config/database.php';
