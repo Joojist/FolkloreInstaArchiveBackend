@@ -7,10 +7,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Entity\Post;
+use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\ORM\EntityManagerInterface;
 
 class PostController extends AbstractController
 {
-    public function savePost(Request $request): Response
+    /**
+     * @Route("/save-post", name="save_post", methods={"POST"})
+     */
+    public function savePost(Request $request, EntityManagerInterface $entityManager): Response
     {
         // Retrieve the data from the request
         $postData = $request->request->all();
@@ -28,7 +33,6 @@ class PostController extends AbstractController
         $post->setDeletedAt(null);
 
         // Save the post to the database
-        $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($post);
         $entityManager->flush();
 
