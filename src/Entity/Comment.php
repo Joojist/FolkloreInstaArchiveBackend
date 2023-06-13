@@ -3,11 +3,12 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use DateTimeInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="Comments")
+ * @ORM\Table(name="Comment")
  */
 class Comment
 {
@@ -19,29 +20,31 @@ class Comment
     private $id;
 
     /**
-     * @ORM\Column(name="post_id", type="integer")
-     */
-    private $postId;
-
-    /**
-     * @ORM\Column(name="ig_user_id", type="integer")
-     */
-    private $igUserId;
-
-    /**
-     * @ORM\Column(name="content", type="text")
+     * @ORM\Column(type="text")
      */
     private $content;
 
     /**
-     * @ORM\Column(name="created_at", type="datetime")
+     * @ORM\ManyToOne(targetEntity="Post", inversedBy="comments")
+     * @ORM\JoinColumn(name="post_id", referencedColumnName="id")
      */
-    private $createdAt;
+    private $post;
 
     /**
-     * @ORM\Column(name="deleted_at", type="datetime")
+     * @ORM\ManyToOne(targetEntity="Comment", inversedBy="replies")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", nullable=true)
      */
-    private $deletedAt;
+    private $parent;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="parent")
+     */
+    private $replies;
+
+    public function __construct()
+    {
+        $this->replies = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -51,30 +54,6 @@ class Comment
     public function setId(int $id): self
     {
         $this->id = $id;
-
-        return $this;
-    }
-
-    public function getPostId(): int
-    {
-        return $this->postId;
-    }
-
-    public function setPostId(int $postId): self
-    {
-        $this->postId = $postId;
-
-        return $this;
-    }
-
-    public function getIgUserId(): int
-    {
-        return $this->igUserId;
-    }
-
-    public function setIgUserId(int $igUserId): self
-    {
-        $this->igUserId = $igUserId;
 
         return $this;
     }
@@ -91,27 +70,50 @@ class Comment
         return $this;
     }
 
-    public function getCreatedAt(): DateTimeInterface
+    public function getPost(): ?Post
     {
-        return $this->createdAt;
+        return $this->post;
     }
 
-    public function setCreatedAt(DateTimeInterface $createdAt): self
+    public function setPost(?Post $post): self
     {
-        $this->createdAt = $createdAt;
+        $this->post = $post;
 
         return $this;
     }
 
-    public function getDeletedAt(): DateTimeInterface
+    public function getParent(): ?Comment
     {
-        return $this->deletedAt;
+        return $this->parent;
     }
 
-    public function setDeletedAt(DateTimeInterface $deletedAt): self
+    public function setParent(?Comment $parent): self
     {
-        $this->deletedAt = $deletedAt;
+        $this->parent = $parent;
 
         return $this;
     }
+
+    public function getReplies(): Collection
+    {
+        return $this->replies;
+    }
+
+    public function addReply(Comment $reply): self
+    {
+        if (!$this->replies->contains($reply)) {
+            $this->replies[] = $reply;
+            $reply->setParent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReply(Comment $reply): self
+    {
+        $this->replies->removeElement($reply);
+
+        return $this;
+    }
+
 }
