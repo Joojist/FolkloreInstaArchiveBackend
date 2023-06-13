@@ -47,11 +47,10 @@ try {
 $post = new Post();
 
 // Set values for the properties
-$post->setIgUrl('https://www.example.com');
-$post->setIgUserId(123);
 $post->setLikes(50);
 $post->setCreatorId(456);
 $post->setUpdaterId(789);
+$post->setPath('C');
 
 // Create DateTime objects for date properties
 $igCreatedAt = new \DateTime('2023-06-12 10:00:00');
