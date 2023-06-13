@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -17,10 +18,9 @@ class Post
     private $id;
 
     /**
-    * @ORM\Column(type="string")
-    */
+     * @ORM\Column(type="string")
+     */
     private $igUrl;
-
 
     /**
      * @ORM\Column(type="integer")
@@ -62,213 +62,113 @@ class Post
      */
     private $deletedAt;
 
-    /**
-     * Get the value of id
-     */ 
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * Set the value of id
-     *
-     * @param int $id
-     * @return  self
-     */ 
-    public function setId($id)
+    public function setId(int $id): self
     {
         $this->id = $id;
-
         return $this;
     }
 
-    /**
-     * Get the value of igUrl
-     */ 
-    public function getIgUrl()
+    public function getIgUrl(): string
     {
         return $this->igUrl;
     }
 
-    /**
-     * Set the value of igUrl
-     *
-     * @param int $igUrl
-     * @return  self
-     */ 
-    public function setIgUrl($igUrl)
+    public function setIgUrl(string $igUrl): self
     {
         $this->igUrl = $igUrl;
-
         return $this;
     }
 
-    /**
-     * Get the value of igUserId
-     */ 
-    public function getIgUserId()
+    public function getIgUserId(): int
     {
         return $this->igUserId;
     }
 
-    /**
-     * Set the value of igUserId
-     *
-     * @param int $igUserId
-     * @return  self
-     */ 
-    public function setIgUserId($igUserId)
+    public function setIgUserId(int $igUserId): self
     {
         $this->igUserId = $igUserId;
-
         return $this;
     }
 
-    /**
-     * Get the value of likes
-     */ 
-    public function getLikes()
+    public function getLikes(): int
     {
         return $this->likes;
     }
 
-    /**
-     * Set the value of likes
-     *
-     * @param int $likes
-     * @return  self
-     */ 
-    public function setLikes($likes)
+    public function setLikes(int $likes): self
     {
         $this->likes = $likes;
-
         return $this;
     }
 
-    /**
-     * Get the value of creatorId
-     */ 
-    public function getCreatorId()
+    public function getCreatorId(): int
     {
         return $this->creatorId;
     }
 
-    /**
-     * Set the value of creatorId
-     *
-     * @param int $creatorId
-     * @return  self
-     */ 
-    public function setCreatorId($creatorId)
+    public function setCreatorId(int $creatorId): self
     {
         $this->creatorId = $creatorId;
-
         return $this;
     }
 
-    /**
-     * Get the value of updaterId
-     */ 
-    public function getUpdaterId()
+    public function getUpdaterId(): int
     {
         return $this->updaterId;
     }
 
-    /**
-     * Set the value of updaterId
-     *
-     * @param int $updaterId
-     * @return  self
-     */ 
-    public function setUpdaterId($updaterId)
+    public function setUpdaterId(int $updaterId): self
     {
         $this->updaterId = $updaterId;
-
         return $this;
     }
 
-    /**
-     * Get the value of igCreatedAt
-     */ 
-    public function getIgCreatedAt()
+    public function getIgCreatedAt(): \DateTimeInterface
     {
         return $this->igCreatedAt;
     }
 
-    /**
-     * Set the value of igCreatedAt
-     *
-     * @param \DateTime $igCreatedAt
-     * @return  self
-     */ 
-    public function setIgCreatedAt($igCreatedAt)
+    public function setIgCreatedAt(\DateTimeInterface $igCreatedAt): self
     {
         $this->igCreatedAt = $igCreatedAt;
-
         return $this;
     }
 
-    /**
-     * Get the value of createdAt
-     */ 
-    public function getCreatedAt()
+    public function getCreatedAt(): \DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    /**
-     * Set the value of createdAt
-     *
-     * @param \DateTime $createdAt
-     * @return  self
-     */ 
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
-
         return $this;
     }
 
-    /**
-     * Get the value of updatedAt
-     */ 
-    public function getUpdatedAt()
+    public function getUpdatedAt(): \DateTimeInterface
     {
         return $this->updatedAt;
     }
 
-    /**
-     * Set the value of updatedAt
-     *
-     * @param \DateTime $updatedAt
-     * @return  self
-     */ 
-    public function setUpdatedAt($updatedAt)
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
-
         return $this;
     }
 
-    /**
-     * Get the value of deletedAt
-     */ 
-    public function getDeletedAt()
+    public function getDeletedAt(): \DateTimeInterface
     {
         return $this->deletedAt;
     }
 
-    /**
-     * Set the value of deletedAt
-     *
-     * @param \DateTime $deletedAt
-     * @return  self
-     */ 
-    public function setDeletedAt($deletedAt)
+    public function setDeletedAt(\DateTimeInterface $deletedAt): self
     {
         $this->deletedAt = $deletedAt;
-
         return $this;
     }
 }

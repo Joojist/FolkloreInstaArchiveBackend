@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use DateTimeInterface;
 
 /**
  * @ORM\Entity
@@ -42,126 +43,72 @@ class Comment
      */
     private $deletedAt;
 
-    /**
-     * Get the value of id
-     */ 
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * Set the value of id
-     *
-     * @param int $id
-     * @return self
-     */ 
-    public function setId($id)
+    public function setId(int $id): self
     {
         $this->id = $id;
 
         return $this;
     }
 
-    /**
-     * Get the value of postId
-     */ 
-    public function getPostId()
+    public function getPostId(): int
     {
         return $this->postId;
     }
 
-    /**
-     * Set the value of postId
-     *
-     * @param int $postId
-     * @return self
-     */ 
-    public function setPostId($postId)
+    public function setPostId(int $postId): self
     {
         $this->postId = $postId;
 
         return $this;
     }
 
-    /**
-     * Get the value of igUserId
-     */ 
-    public function getIgUserId()
+    public function getIgUserId(): int
     {
         return $this->igUserId;
     }
 
-    /**
-     * Set the value of igUserId
-     *
-     * @param int $igUserId
-     * @return self
-     */ 
-    public function setIgUserId($igUserId)
+    public function setIgUserId(int $igUserId): self
     {
         $this->igUserId = $igUserId;
 
         return $this;
     }
 
-    /**
-     * Get the value of content
-     */ 
-    public function getContent()
+    public function getContent(): string
     {
         return $this->content;
     }
 
-    /**
-     * Set the value of content
-     *
-     * @param string $content
-     * @return self
-     */ 
-    public function setContent($content)
+    public function setContent(string $content): self
     {
         $this->content = $content;
 
         return $this;
     }
 
-    /**
-     * Get the value of createdAt
-     */ 
-    public function getCreatedAt()
+    public function getCreatedAt(): DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    /**
-     * Set the value of createdAt
-     *
-     * @param \DateTime $createdAt
-     * @return self
-     */ 
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt(DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
 
         return $this;
     }
 
-    /**
-     * Get the value of deletedAt
-     */ 
-    public function getDeletedAt()
+    public function getDeletedAt(): DateTimeInterface
     {
         return $this->deletedAt;
     }
 
-    /**
-     * Set the value of deletedAt
-     *
-     * @param \DateTime $deletedAt
-     * @return self
-     */ 
-    public function setDeletedAt($deletedAt)
+    public function setDeletedAt(DateTimeInterface $deletedAt): self
     {
         $this->deletedAt = $deletedAt;
 

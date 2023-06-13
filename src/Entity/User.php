@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="User")
+ * @ORM\Table(name="user")
  */
 class User
 {
@@ -52,107 +52,89 @@ class User
      */
     private $deletedAt;
 
-    // Getters and setters...
-
-    // Get the value of id
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    // Set the value of id
-    public function setId($id)
+    public function setId(int $id): self
     {
         $this->id = $id;
         return $this;
     }
 
-    // Get the value of username
-    public function getUsername()
+    public function getUsername(): string
     {
         return $this->username;
     }
 
-    // Set the value of username
-    public function setUsername($username)
+    public function setUsername(string $username): self
     {
         $this->username = $username;
         return $this;
     }
 
-    // Get the value of password
-    public function getPassword()
+    public function getPassword(): string
     {
         return $this->password;
     }
 
-    // Set the value of password
-    public function setPassword($password)
+    public function setPassword(string $password): self
     {
         $this->password = $password;
         return $this;
     }
 
-    // Get the value of email
-    public function getEmail()
+    public function getEmail(): string
     {
         return $this->email;
     }
 
-    // Set the value of email
-    public function setEmail($email)
+    public function setEmail(string $email): self
     {
         $this->email = $email;
         return $this;
     }
 
-    // Get the value of name
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    // Set the value of name
-    public function setName($name)
+    public function setName(string $name): self
     {
         $this->name = $name;
         return $this;
     }
 
-    // Get the value of createdAt
-    public function getCreatedAt()
+    public function getCreatedAt(): \DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    // Set the value of createdAt
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
         return $this;
     }
 
-    // Get the value of updatedAt
-    public function getUpdatedAt()
+    public function getUpdatedAt(): \DateTimeInterface
     {
         return $this->updatedAt;
     }
 
-    // Set the value of updatedAt
-    public function setUpdatedAt($updatedAt)
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
         return $this;
     }
 
-    // Get the value of deletedAt
-    public function getDeletedAt()
+    public function getDeletedAt(): \DateTimeInterface
     {
         return $this->deletedAt;
     }
 
-    // Set the value of deletedAt
-    public function setDeletedAt($deletedAt)
+    public function setDeletedAt(\DateTimeInterface $deletedAt): self
     {
         $this->deletedAt = $deletedAt;
         return $this;

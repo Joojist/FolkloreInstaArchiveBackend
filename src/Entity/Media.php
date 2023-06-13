@@ -27,63 +27,36 @@ class Media
      */
     private $url;
 
-    /**
-     * Get the value of id
-     */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * Set the value of id
-     *
-     * @param int $id
-     * @return self
-     */
-    public function setId($id)
+    public function setId(int $id): self
     {
         $this->id = $id;
 
         return $this;
     }
 
-    /**
-     * Get the value of postId
-     */
-    public function getPostId()
+    public function getPostId(): int
     {
         return $this->postId;
     }
 
-    /**
-     * Set the value of postId
-     *
-     * @param int $postId
-     * @return self
-     */
-    public function setPostId($postId)
+    public function setPostId(int $postId): self
     {
         $this->postId = $postId;
 
         return $this;
     }
 
-    /**
-     * Get the value of url
-     */
-    public function getUrl()
+    public function getUrl(): string
     {
         return $this->url;
     }
 
-    /**
-     * Set the value of url
-     *
-     * @param string $url
-     * @return self
-     */
-    public function setUrl($url)
+    public function setUrl(string $url): self
     {
         $this->url = $url;
 
