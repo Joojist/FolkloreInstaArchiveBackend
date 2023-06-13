@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="Media")
+ * @ORM\Table(name="media")
  */
 class Media
 {
@@ -18,48 +18,46 @@ class Media
     private $id;
 
     /**
-     * @ORM\Column(name="post_id", type="integer")
+     * @ORM\Column(type="string")
      */
-    private $postId;
+    private $path;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="Post", inversedBy="media")
+     * @ORM\JoinColumn(name="post_id", referencedColumnName="id")
      */
-    private $url;
+    private $post;
+
+    // ...
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function setId(int $id): self
+    public function getPath(): string
     {
-        $this->id = $id;
+        return $this->path;
+    }
+
+    public function setPath(string $path): self
+    {
+        $this->path = $path;
 
         return $this;
     }
 
-    public function getPostId(): int
+    public function getPost(): ?Post
     {
-        return $this->postId;
+        return $this->post;
     }
 
-    public function setPostId(int $postId): self
+    public function setPost(?Post $post): self
     {
-        $this->postId = $postId;
+        $this->post = $post;
 
         return $this;
     }
 
-    public function getUrl(): string
-    {
-        return $this->url;
-    }
-
-    public function setUrl(string $url): self
-    {
-        $this->url = $url;
-
-        return $this;
-    }
+    // ...
 }

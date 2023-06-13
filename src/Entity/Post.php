@@ -2,11 +2,14 @@
 
 namespace App\Entity;
 
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="Post")
+ * @ORM\Table(name="post")
  */
 class Post
 {
@@ -20,12 +23,12 @@ class Post
     /**
      * @ORM\Column(type="string")
      */
-    private $igUrl;
+    private $path;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\OneToMany(targetEntity="Media", mappedBy="post")
      */
-    private $igUserId;
+    private $media;
 
     /**
      * @ORM\Column(type="integer")
@@ -62,36 +65,64 @@ class Post
      */
     private $deletedAt;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="post", cascade={"persist", "remove"})
+     */
+    private $comments;
+
+    public function __construct()
+    {
+        $this->media = new ArrayCollection();
+        $this->comments = new ArrayCollection();
+    }
+
+    public function addMedia(Media $media): self
+    {
+        if (!$this->media->contains($media)) {
+            $this->media[] = $media;
+            $media->setPost($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMedia(Media $media): self
+    {
+        $this->media->removeElement($media);
+
+        return $this;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setPost($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        $this->comments->removeElement($comment);
+
+        return $this;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function setId(int $id): self
+    public function getPath(): string
     {
-        $this->id = $id;
-        return $this;
+        return $this->path;
     }
 
-    public function getIgUrl(): string
+    public function setPath(string $path): self
     {
-        return $this->igUrl;
-    }
-
-    public function setIgUrl(string $igUrl): self
-    {
-        $this->igUrl = $igUrl;
-        return $this;
-    }
-
-    public function getIgUserId(): int
-    {
-        return $this->igUserId;
-    }
-
-    public function setIgUserId(int $igUserId): self
-    {
-        $this->igUserId = $igUserId;
+        $this->path = $path;
         return $this;
     }
 
@@ -128,45 +159,45 @@ class Post
         return $this;
     }
 
-    public function getIgCreatedAt(): \DateTimeInterface
+    public function getIgCreatedAt(): DateTimeInterface
     {
         return $this->igCreatedAt;
     }
 
-    public function setIgCreatedAt(\DateTimeInterface $igCreatedAt): self
+    public function setIgCreatedAt(DateTimeInterface $igCreatedAt): self
     {
         $this->igCreatedAt = $igCreatedAt;
         return $this;
     }
 
-    public function getCreatedAt(): \DateTimeInterface
+    public function getCreatedAt(): DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    public function setCreatedAt(DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
         return $this;
     }
 
-    public function getUpdatedAt(): \DateTimeInterface
+    public function getUpdatedAt(): DateTimeInterface
     {
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    public function setUpdatedAt(DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
         return $this;
     }
 
-    public function getDeletedAt(): \DateTimeInterface
+    public function getDeletedAt(): DateTimeInterface
     {
         return $this->deletedAt;
     }
 
-    public function setDeletedAt(\DateTimeInterface $deletedAt): self
+    public function setDeletedAt(DateTimeInterface $deletedAt): self
     {
         $this->deletedAt = $deletedAt;
         return $this;
