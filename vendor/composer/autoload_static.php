@@ -197,6 +197,10 @@ class ComposerStaticInit91bbd16b6ea789626da5208e01355f8a
         array (
             0 => __DIR__ . '/..' . '/psr/cache/src',
         ),
+        'Facebook\\WebDriver\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/php-webdriver/webdriver/lib',
+        ),
         'Doctrine\\Persistence\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/persistence/src/Persistence',
