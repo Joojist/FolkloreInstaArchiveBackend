@@ -26,5 +26,5 @@ $jsonData = json_encode($posts);
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 
-// Output the JSON data
+// Output the JSON data 
 echo $jsonData;
