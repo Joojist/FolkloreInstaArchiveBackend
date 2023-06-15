@@ -66,6 +66,21 @@ class Post
     private $deletedAt;
 
     /**
+     * @ORM\Column(type="string")
+     */
+    private $caption;
+
+    /**
+     * @ORM\Column(type="array")
+     */
+    private $tags;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="IGUser", inversedBy="posts")
+     * @ORM\JoinColumn(name="ig_user_id", referencedColumnName="id")
+     */
+    private $igUser;
+    /**
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="post", cascade={"persist", "remove"})
      */
     private $comments;
@@ -109,6 +124,18 @@ class Post
 
         return $this;
     }
+
+    public function getIgUser(): ?IGUser
+    {
+        return $this->igUser;
+    }
+
+    public function setIgUser(?IGUser $igUser): self
+    {
+        $this->igUser = $igUser;
+        return $this;
+    }
+
 
     public function getId(): ?int
     {
@@ -200,6 +227,28 @@ class Post
     public function setDeletedAt(DateTimeInterface $deletedAt): self
     {
         $this->deletedAt = $deletedAt;
+        return $this;
+    }
+
+    public function getCaption(): string
+    {
+        return $this->caption;
+    }
+
+    public function setCaption(string $caption): self
+    {
+        $this->caption = $caption;
+        return $this;
+    }
+
+    public function getTags(): array
+    {
+        return $this->tags;
+    }
+
+    public function setTags(array $tags): self
+    {
+        $this->tags = $tags;
         return $this;
     }
 }
