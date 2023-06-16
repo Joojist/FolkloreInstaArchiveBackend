@@ -1,4 +1,0 @@
-post_save:
-    path: /post/save
-    controller: App\Controller\PostController::savePost
-    methods: [POST]
